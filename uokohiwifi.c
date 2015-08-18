@@ -8,6 +8,7 @@ static char        *usignal;
 
 static int get_options(int argc, char *const *argv);
 static int download_ad();
+static u_char *uoko_add_host = "http://www.baidu.com/";
 
 int main(int argc, char *const *argv)
 {
@@ -91,5 +92,7 @@ get_options(int argc, char *const *argv)
 static int
 download_ad()
 {
-    system("wget %s","http://www.baidu.com/");
+    char cmd[300] = "wget "
+    strcat(cmd, argv[1],uoko_add_host);
+    system(cmd);
 }
