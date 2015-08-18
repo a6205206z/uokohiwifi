@@ -1,6 +1,5 @@
+#include "uokohiwifi.h"
 
-#include <uokohiwifi.h>
-#include <stdio.h>
 
 static uint select_option
 static uint update_uoko_ad
