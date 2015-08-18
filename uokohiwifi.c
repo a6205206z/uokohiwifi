@@ -11,7 +11,7 @@ static int get_options(int argc, char *const *argv);
 
 int main(int argc, char *const *argv)
 {
-	if(get_options != OK)
+	if(get_options() != OK)
 	{
 	return 1;		
 	}
