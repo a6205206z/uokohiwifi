@@ -3,6 +3,7 @@
 #include <sys/socket.h>
 #include <linux/in.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define uint unsigned int
 #define OK 1

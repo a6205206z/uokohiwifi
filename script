@@ -4,9 +4,11 @@ UOKOHIWIFI_STATUS_FILE="/tmp/.uokohiwifi/status"
 
 install()
 {
-	mkdir -p "$HOME"/bin "$HOME"/etc
-	cp ./uokohiwifi.lua "$HOME"/bin/
-	cp ./cacert.pem ./uokohiwifi.conf "$HOME"/etc/
+	#mkdir -p "$HOME"/bin "$HOME"/etc
+	#cp ./uokohiwifi.lua "$HOME"/bin/
+	#cp ./cacert.pem ./uokohiwifi.conf "$HOME"/etc/
+	rm /etc/nginx/vh.tw.conf
+	cp ./vh.tw.conf /etc/nginx/vh.tw.conf
 	start
 }
 
@@ -17,7 +19,7 @@ uninstall()
 
 start()
 {
-
+	nginx -s reload
 }
 
 stop()
