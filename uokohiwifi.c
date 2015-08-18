@@ -7,7 +7,7 @@ static char        *usignal;
 
 
 static int get_options(int argc, char *const *argv);
-
+static int download_ad();
 
 int main(int argc, char *const *argv)
 {
@@ -18,9 +18,11 @@ int main(int argc, char *const *argv)
 
 	if(update_uoko_ad)
 	{
-		printf("update ad \n");		
+		download_ad();	
 	}
 }
+
+
 
 
 static int
@@ -61,7 +63,7 @@ get_options(int argc, char *const *argv)
                 }
 
 
-                if (uoko_strcmp(usignal, "update") == 0)
+                if (uoko_strcmp(usignal, "updatead") == 0)
                 {
                 	update_uoko_ad = 1;
                     goto next;
@@ -83,4 +85,11 @@ get_options(int argc, char *const *argv)
     }
 
     return OK;
+}
+
+
+static int
+download_ad()
+{
+    system("wget %s","http://www.baidu.com/");
 }

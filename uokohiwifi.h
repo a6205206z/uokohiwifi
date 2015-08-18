@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <sys/types.h>
+#include <sys/socket.h>
+#include <linux/in.h>
+#include <stdlib.h>
 
 #define uint unsigned int
 #define OK 1
