@@ -1,12 +1,12 @@
 #include "uokohiwifi.h"
 
 
-static uint         select_option
-static uint         update_uoko_ad
+static uint         select_option;
+static uint         update_uoko_ad;
 static char        *usignal;
 
 
-static int get_options(int argc, char *const *argv)
+static int get_options(int argc, char *const *argv);
 
 
 int main(int argc, char *const *argv)
@@ -29,11 +29,13 @@ get_options(int argc, char *const *argv)
     u_char     *p;
     uint   		i;
 
-    for (i = 1; i < argc; i++) {
+    for (i = 1; i < argc; i++) 
+    {
 
         p = (u_char *) argv[i];
 
-        if (*p++ != '-') {
+        if (*p++ != '-') 
+        {
             printf("invalid option: \"%s\"", argv[i]);
             return ERROR;
         }
