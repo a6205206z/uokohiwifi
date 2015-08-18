@@ -60,13 +60,15 @@ get_options(int argc, char *const *argv)
                     return ERROR;
                 }
 
-                printf("%d\n", uoko_strcmp(usignal, "update"));
-                if (uoko_strcmp(usignal, "update") == 1)
+
+                if (uoko_strcmp(usignal, "update") == 0)
                 {
                 	update_uoko_ad = 1;
                     goto next;
                 }
 
+                printf(0, "invalid option: \"-s %s\"", usignal);
+                return ERROR;
                 break;
 
             default:
