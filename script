@@ -1,0 +1,31 @@
+#!/bin/sh
+
+UOKOHIWIFI_STATUS_FILE="/tmp/.uokohiwifi/status"
+
+install()
+{
+	mkdir -p "$HOME"/bin "$HOME"/etc
+	cp ./uokohiwifi.lua "$HOME"/bin/
+	cp ./cacert.pem ./uokohiwifi.conf "$HOME"/etc/
+	start
+}
+
+uninstall()
+{
+	stop
+}
+
+start()
+{
+
+}
+
+stop()
+{
+
+}
+
+status()
+{
+	
+}
