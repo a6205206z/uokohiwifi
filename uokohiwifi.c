@@ -1,8 +1,9 @@
 #include "uokohiwifi.h"
 
 
-static uint select_option
-static uint update_uoko_ad
+static uint         select_option
+static uint         update_uoko_ad
+static char        *usignal;
 
 
 static int get_options(int argc, char *const *argv)
