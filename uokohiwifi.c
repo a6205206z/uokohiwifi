@@ -3,12 +3,12 @@
 
 static uint         select_option;
 static uint         update_uoko_ad;
-static char        *usignal;
+static char         *usignal;
+static const char   *uoko_add_host = "http://www.baidu.com/";
 
-
-static int get_options(int argc, char *const *argv);
+static int  get_options(int argc, char *const *argv);
 static int download_ad();
-static u_char *uoko_add_host = "http://www.baidu.com/";
+
 
 int main(int argc, char *const *argv)
 {
@@ -92,7 +92,7 @@ get_options(int argc, char *const *argv)
 static int
 download_ad()
 {
-    char cmd[300] = "wget "
-    strcat(cmd, argv[1],uoko_add_host);
+    char cmd[300] = "wget ";
+    strcat(cmd ,uoko_add_host);
     system(cmd);
 }
