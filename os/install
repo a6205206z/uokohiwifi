@@ -1,0 +1,9 @@
+#!/bin/sh
+
+NGINX_CONFIG_DIR_PATH = "/etc/nginx/"
+NGINX_CONFIG_VH_FILE_PATH = "/etc/nginx/vh.tw.conf"
+
+if [-x "$NGINX_CONFIG_VH_FILE_PATH"]; then
+	mv /etc/nginx/vh.tw.conf /etc/nginx/vh.tw.conf.bak
+fi
+cp ./vh.tw.conf /etc/nginx/vh.tw.conf
