@@ -1,12 +1,38 @@
 #!/bin/sh
 
-NGINX_CONFIG_DIR_PATH = "/etc/nginx/"
-NGINX_CONFIG_VH_FILE_PATH = "/etc/nginx/vh.tw.conf"
+NGINX_CONFIG_DIR_PATH="/etc/nginx/"
+NGINX_CONFIG_VH_FILE_PATH="/etc/nginx/vh.tw.conf"
+NGINX_CONFIG_VH_FILE_BAK_PATH="/etc/nginx/vh.tw.conf.bak"
 
-if [-x "$NGINX_CONFIG_VH_FILE_PATH"]; then
-	mv /etc/nginx/vh.tw.conf /etc/nginx/vh.tw.conf.bak
+UOKO_NGINX_VH_FILE_CONFIG="./vh.tw.conf"
+UOKO_WEB_LOCAL_INDEX_FILE_PATH="./index.html"
+UOKO_DIR_PATH="/www/uoko"
+UOKO_WEB_INDEX_FILE_PATH="/www/uoko/index.html"
+
+if [ -e "$NGINX_CONFIG_VH_FILE_PATH" ]; then
+	echo "mv $NGINX_CONFIG_VH_FILE_PATH $NGINX_CONFIG_VH_FILE_BAK_PATH"
+	mv $NGINX_CONFIG_VH_FILE_PATH $NGINX_CONFIG_VH_FILE_BAK_PATH
+else
+	echo "file $NGINX_CONFIG_VH_FILE_PATH not exit"
 fi
 
-if [-x "$NGINX_CONFIG_DIR_PATH"]; then
-	cp ./vh.tw.conf /etc/nginx/vh.tw.conf
+if [ -e "$UOKO_NGINX_VH_FILE_CONFIG" ]; then
+	echo "cp $UOKO_NGINX_VH_FILE_CONFIG $NGINX_CONFIG_VH_FILE_PATH"
+	cp $UOKO_NGINX_VH_FILE_CONFIG $NGINX_CONFIG_VH_FILE_PATH
+else
+	echo "file $UOKO_NGINX_VH_FILE_CONFIG not exit"
 fi
+
+if [ -e "$UOKO_DIR_PATH" ]; then
+	echo "mkdir $UOKO_DIR_PATH already exists"
+else
+	mkdir $UOKO_DIR_PATH
+fi
+
+if [ -e "$UOKO_WEB_LOCAL_INDEX_FILE_PATH" ]; then
+	echo "cp $UOKO_WEB_LOCAL_INDEX_FILE_PATH $UOKO_WEB_INDEX_FILE_PATH"
+	cp $UOKO_WEB_LOCAL_INDEX_FILE_PATH $UOKO_WEB_INDEX_FILE_PATH
+fi
+
+echo "nginx -s reload"
+nginx -s reload

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+NGINX_CONFIG_VH_FILE_PATH="/etc/nginx/vh.tw.conf"
+NGINX_CONFIG_VH_FILE_BAK_PATH="/etc/nginx/vh.tw.conf.bak"
+
+UOKO_DIR_PATH="/www/uoko"
+
+if [ -e "$NGINX_CONFIG_VH_FILE_BAK_PATH" ]; then
+	echo "rm -irf $NGINX_CONFIG_VH_FILE_PATH"
+	rm -irf $NGINX_CONFIG_VH_FILE_PATH
+	echo "mv $NGINX_CONFIG_VH_FILE_BAK_PATH $NGINX_CONFIG_VH_FILE_PATH"
+	mv $NGINX_CONFIG_VH_FILE_BAK_PATH $NGINX_CONFIG_VH_FILE_PATH
+fi
+
+if [ -e "$UOKO_DIR_PATH" ]; then
+	echo "rm -rf $UOKO_DIR_PATH"
+	rm -rf $UOKO_DIR_PATH
+fi
+
+echo "nginx -s reload"
+nginx -s reload
