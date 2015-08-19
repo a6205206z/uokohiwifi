@@ -3,7 +3,7 @@
 local UOKO_AD_SERVICE_URL = "http://www.uoko.com/aboutus/contact/"
 local UOKO_DIR_PATH = "/www/uoko"
 local UOKO_AD_LOCAL_DIR_PATH = "/www/uoko/ad" 
-local UOKO_AD_LOCAL_FILE_PATH = "/www/uoko/add/ad.html"
+local UOKO_AD_LOCAL_FILE_PATH = "/www/uoko/ad/ad.html"
 
 function file_exists(filepath)
   local f = io.open(filepath, "r")
@@ -21,7 +21,7 @@ end
 
 function download_ad_page()
 	if not file_exists(UOKO_DIR_PATH) then
-		mkdirr(UOKO_DIR_PATH
+		mkdirr(UOKO_DIR_PATH)
 	end
 
 	if not file_exists(UOKO_AD_LOCAL_DIR_PATH) then
@@ -36,7 +36,7 @@ end
 
 
 
-if arg[1] == "update" then
+if arg[1] == "-u" then
 	if arg[2] == "ad" then
 		rc,msg = download_ad_page()
 		print(msg)
@@ -44,7 +44,6 @@ if arg[1] == "update" then
 	end
 else
 	print("Usage:")
-	print(" uokohiwifi -u    	        -- update")
-	print("					  ad 	    -- update uoko ad to local server")
+	print(" uokohiwifi -u ad  	        -- update uoko ad to local server")
 	os.exit(2)
 end
