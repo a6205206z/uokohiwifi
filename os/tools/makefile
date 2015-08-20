@@ -5,5 +5,5 @@ uoko_tcpclient.o: uoko_tcpclient.h
 remotecmd.o:
 .PHONY : clean
 clean :
-    	@echo remove ...
-    	-rm remotecmd $(objects)
+        @echo remove ...
+        -rm remotecmd $(objects)
