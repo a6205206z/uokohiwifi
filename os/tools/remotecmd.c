@@ -7,8 +7,8 @@ static uint         exc_pull_command;
 static char         *usignal;
 static const char   *uoko_command_server = "127.0.0.1";
 static const int    uoko_command_server_port = 80;
-static char   *uoko_command_server_location = "/index";
-static char   *uoko_command_server_parms = "i=1";
+static char         *uoko_command_server_location = "/index";
+static char         *uoko_command_server_parms = "i=1";
 
 static int get_options(int argc, char *const *argv);
 static int pull_command();
@@ -22,7 +22,7 @@ int http_post(uoko_tcpclient *pclient,char *page,char *request,char **response){
     int len=0;
 
     lpbuf = NULL;
-    const char *header2="User-Agent: UokoHiwifi Http 0.1\r\nCache-Control: no-cache\r\nContent-Type: application/x-www-form-urlencoded\r\nAccept: */*\r\n";
+    const char *header2="User-Agent: UokoHiwifi \r\nCache-Control: no-cache\r\nContent-Type: application/x-www-form-urlencoded\r\nAccept: */*\r\n";
 
     sprintf(post,"POST %s HTTP/1.0\r\n",page);
     sprintf(host,"HOST: %s:%d\r\n",pclient->remote_ip,pclient->remote_port);
@@ -111,14 +111,14 @@ static int pull_command(){
     uoko_tcpclient client;
 
     char *response = NULL;
-    printf("开始组包\n");
+    //printf("开始组包\n");
     uoko_tcpclient_create(&client,uoko_command_server,uoko_command_server_port);
 
     if(http_post(&client, uoko_command_server_location,uoko_command_server_parms,&response)){
-        printf("失败!\n");
+        //printf("失败!\n");
         exit(2);
     }
-    printf("响应:\n%d:%s\n",strlen(response),response);
+    //printf("响应:\n%d:%s\n",strlen(response),response);
 
     free(response);
     return OK;
