@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <arpa/inet.h>
 #include <netdb.h>
-
 #include "uoko_tcpclient.h"
 
 #define BUFFER_SIZE 1024

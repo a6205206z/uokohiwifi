@@ -5,7 +5,10 @@
 static uint         select_option;
 static uint         exc_pull_command;
 static char         *usignal;
-static const char   *uoko_command_server = "http://www.baidu.com/";
+static const char   *uoko_command_server = "127.0.0.1";
+static const int    uoko_command_server_port = 80;
+static const char   *uoko_command_server_location = "/index";
+static const char   *uoko_command_server_parms = "i=1";
 
 static int get_options(int argc, char *const *argv);
 static int pull_command();
@@ -109,9 +112,9 @@ static int pull_command(){
 
     char *response = NULL;
     printf("开始组包\n");
-    uoko_tcpclient_create(&client,"127.0.0.1",80);
+    uoko_tcpclient_create(&client,uoko_command_server,uoko_command_server_port);
 
-    if(http_post(&client,"/i.php","f1=hello",&response)){
+    if(http_post(&client, uoko_command_server_location,uoko_command_server_parms,&response)){
         printf("失败!\n");
         exit(2);
     }
