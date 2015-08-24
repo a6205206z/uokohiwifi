@@ -163,7 +163,7 @@ pull_command(){
     uoko_tcpclient  client;
     char            mac[18];
 
-    char *response = NULL;
+    char            *response = NULL;
     uoko_tcpclient_create(&client,uoko_command_server,uoko_command_server_port);
 
     if(get_mac(mac,sizeof(mac)) < 0){
@@ -174,6 +174,7 @@ pull_command(){
     sprintf(push_server_data,"mac=%s",mac);
 
     if(http_post(&client, uoko_command_server_location,push_server_data,&response)){
+        printf("ERROR\n");
         return ERROR;
     }
 
