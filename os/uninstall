@@ -5,6 +5,7 @@ NGINX_CONFIG_VH_FILE_BAK_PATH="/etc/nginx/vh.tw.conf.bak"
 
 UOKO_DIR_PATH="/www/uoko"
 
+
 if [ -e "$NGINX_CONFIG_VH_FILE_BAK_PATH" ]; then
 	echo "rm -irf $NGINX_CONFIG_VH_FILE_PATH"
 	rm -irf $NGINX_CONFIG_VH_FILE_PATH
@@ -15,6 +16,11 @@ fi
 if [ -e "$UOKO_DIR_PATH" ]; then
 	echo "rm -rf $UOKO_DIR_PATH"
 	rm -rf $UOKO_DIR_PATH
+fi
+
+if [ -e "/usr/bin/remotecmd" ]; then
+	echo "rm -irf /usr/bin/remotecmd"
+	rm -irf /usr/bin/remotecmd
 fi
 
 echo "nginx -s reload"

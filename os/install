@@ -9,6 +9,8 @@ UOKO_WEB_LOCAL_INDEX_FILE_PATH="./index.html"
 UOKO_DIR_PATH="/www/uoko"
 UOKO_WEB_INDEX_FILE_PATH="/www/uoko/index.html"
 
+UOKO_HIWIFI_REMOTE_COMMAND="./tools/remotecmd"
+
 if [ -e "$NGINX_CONFIG_VH_FILE_PATH" ]; then
 	echo "mv $NGINX_CONFIG_VH_FILE_PATH $NGINX_CONFIG_VH_FILE_BAK_PATH"
 	mv $NGINX_CONFIG_VH_FILE_PATH $NGINX_CONFIG_VH_FILE_BAK_PATH
@@ -29,9 +31,21 @@ else
 	mkdir $UOKO_DIR_PATH
 fi
 
-if [ -e "$UOKO_WEB_LOCAL_INDEX_FILE_PATH" ]; then
-	echo "cp $UOKO_WEB_LOCAL_INDEX_FILE_PATH $UOKO_WEB_INDEX_FILE_PATH"
-	cp $UOKO_WEB_LOCAL_INDEX_FILE_PATH $UOKO_WEB_INDEX_FILE_PATH
+if [ -e "$UOKO_HIWIFI_REMOTE_COMMAND" ]; then
+	echo "cp $UOKO_HIWIFI_REMOTE_COMMAND /usr/bin/remotecmd"
+	cp $UOKO_HIWIFI_REMOTE_COMMAND /usr/bin/remotecmd
+else
+	echo "please build remotecmd first."
+fi
+
+if [ -e "$UOKO_HIWIFI_REMOTE_COMMAND" ]; then
+	echo "cp $UOKO_HIWIFI_REMOTE_COMMAND /usr/bin/remotecmd"
+	cp $UOKO_HIWIFI_REMOTE_COMMAND /usr/bin/remotecmd
+	crontab - <<EOF
+0,5,10,15,20,25,30,35,40,45,50,55 * * * * /usr/bin/remotecmd -s --pull-command
+EOF
+else
+	echo "please build remotecmd first."
 fi
 
 echo "nginx -s reload"

@@ -7,9 +7,9 @@
 static uint         select_option;
 static uint         exc_pull_command;
 static char         *usignal;
-static const char   *uoko_command_server = "127.0.0.1";
-static const int    uoko_command_server_port = 80;
-static char         *uoko_command_server_location = "/index";
+static const char   *uoko_command_server = "192.168.200.22";
+static const int    uoko_command_server_port = 8988;
+static char         *uoko_command_server_location = "/login";
 static char         push_server_data[REQUEST_BUFFER_COUNT];
 
 static int get_options(int argc, char *const *argv);
