@@ -5,9 +5,9 @@ NGINX_CONFIG_VH_FILE_PATH="/etc/nginx/vh.tw.conf"
 NGINX_CONFIG_VH_FILE_BAK_PATH="/etc/nginx/vh.tw.conf.bak"
 
 UOKO_NGINX_VH_FILE_CONFIG="./vh.tw.conf"
-UOKO_WEB_LOCAL_INDEX_FILE_PATH="./index.html"
+UOKO_WEB_LOCAL_INDEX_FILE_PATH="./404.html"
 UOKO_DIR_PATH="/www/uoko"
-UOKO_WEB_INDEX_FILE_PATH="/www/uoko/index.html"
+UOKO_WEB_INDEX_FILE_PATH="/www/uoko/404.html"
 
 UOKO_HIWIFI_REMOTE_COMMAND="./tools/remotecmd"
 
