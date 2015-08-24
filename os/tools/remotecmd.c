@@ -10,7 +10,7 @@ static char         *usignal;
 static const char   *uoko_command_server = "127.0.0.1";
 static const int    uoko_command_server_port = 80;
 static char         *uoko_command_server_location = "/index";
-static char         *push_server_data;
+static char         push_server_data[REQUEST_BUFFER_COUNT];
 
 static int get_options(int argc, char *const *argv);
 static int pull_command();
@@ -146,9 +146,9 @@ pull_command(){
     //printf("开始组包\n");
     uoko_tcpclient_create(&client,uoko_command_server,uoko_command_server_port);
 
-    //if(get_mac(mac,sizeof(mac)) < 0){
-    //    return ERROR;
-    //}
+    if(get_mac(mac,sizeof(mac)) < 0){
+        return ERROR;
+    }
 
     sprintf(push_server_data,"mac=%s",mac);
 
