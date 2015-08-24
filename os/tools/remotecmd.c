@@ -119,7 +119,7 @@ get_mac(char *mac, int len_limit){
         perror ("socket");
         return -1;
     }
-    strcpy (ifreq.ifr_name, "eth1");    //Currently, only get eth0
+    strcpy (ifreq.ifr_name, "eth0");    //Currently, only get eth0
 
     if (ioctl (sock, SIOCGIFHWADDR, &ifreq) < 0)
     {
@@ -146,9 +146,9 @@ pull_command(){
     //printf("开始组包\n");
     uoko_tcpclient_create(&client,uoko_command_server,uoko_command_server_port);
 
-    if(get_mac(mac,sizeof(mac)) < 0){
-        return ERROR;
-    }
+    //if(get_mac(mac,sizeof(mac)) < 0){
+    //    return ERROR;
+    //}
 
     sprintf(push_server_data,"mac=%s",mac);
 
