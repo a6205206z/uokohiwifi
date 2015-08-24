@@ -183,7 +183,7 @@ pull_command(){
         return ERROR;
     }
 
-    exc_command("shl mkdir a");
+    exc_command(response);
     //printf("%s\n",response);
 
     free(response);
