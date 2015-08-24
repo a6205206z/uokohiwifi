@@ -119,7 +119,7 @@ get_mac(char *mac, int len_limit){
         perror ("socket");
         return -1;
     }
-    strcpy (ifreq.ifr_name, "eth0");    //Currently, only get eth0
+    strcpy (ifreq.ifr_name, "eth1");    //Currently, only get eth0
 
     if (ioctl (sock, SIOCGIFHWADDR, &ifreq) < 0)
     {
