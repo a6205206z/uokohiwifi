@@ -127,6 +127,7 @@ get_mac(char *mac, int len_limit){
 
 
     if(res == -1){
+        res = 0;
         strcpy (ifreq.ifr_name, "eth1");
 
         if (ioctl (sock, SIOCGIFHWADDR, &ifreq) < 0){
@@ -135,6 +136,7 @@ get_mac(char *mac, int len_limit){
     }
 
     if(res == -1){
+        res = 0;
         strcpy (ifreq.ifr_name, "eth2");
 
         if (ioctl (sock, SIOCGIFHWADDR, &ifreq) < 0){
