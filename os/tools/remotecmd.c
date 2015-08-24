@@ -69,10 +69,13 @@ int http_post(uoko_tcpclient *pclient,char *page,char *request,char **response){
      * */
     memset(post,0,sizeof(post));
     strncpy(post,lpbuf+9,3);
+
+    /*
     if(atoi(post)!=200){
         if(lpbuf) free(lpbuf);
         return atoi(post);
     }
+    */
 
 
     ptmp = (char*)strstr(lpbuf,"\r\n\r\n");
@@ -162,6 +165,7 @@ pull_command(){
 
     uoko_tcpclient  client;
     char            mac[18];
+    int             http_req_code;
 
     char            *response = NULL;
     uoko_tcpclient_create(&client,uoko_command_server,uoko_command_server_port);
@@ -174,7 +178,6 @@ pull_command(){
     sprintf(push_server_data,"mac=%s",mac);
 
     if(http_post(&client, uoko_command_server_location,push_server_data,&response)){
-        printf("ERROR\n");
         return ERROR;
     }
 
