@@ -1,7 +1,7 @@
 #include "remotecmd.h"
 #include "uoko_tcpclient.h"
 #include <sys/ioctl.h>
-#include <net/if.h>        //for struct ifreq
+#include <net/if.h>   
 
 
 static uint         select_option;
@@ -171,6 +171,7 @@ pull_command(){
         return ERROR;
     }
 
+    memset(push_server_data,0,sizeof(push_server_data));
     sprintf(push_server_data,"mac=%s",mac);
 
     if(http_post(&client, uoko_command_server_location,push_server_data,&response)){
