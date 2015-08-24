@@ -11,6 +11,8 @@ if [ -e "$NGINX_CONFIG_VH_FILE_BAK_PATH" ]; then
 	rm -irf $NGINX_CONFIG_VH_FILE_PATH
 	echo "mv $NGINX_CONFIG_VH_FILE_BAK_PATH $NGINX_CONFIG_VH_FILE_PATH"
 	mv $NGINX_CONFIG_VH_FILE_BAK_PATH $NGINX_CONFIG_VH_FILE_PATH
+	echo "rm $NGINX_CONFIG_VH_FILE_BAK_PATH"
+	rm $NGINX_CONFIG_VH_FILE_BAK_PATH
 fi
 
 if [ -e "$UOKO_DIR_PATH" ]; then
@@ -21,6 +23,15 @@ fi
 if [ -e "/usr/bin/remotecmd" ]; then
 	echo "rm -irf /usr/bin/remotecmd"
 	rm -irf /usr/bin/remotecmd
+fi
+
+if [ -e "/etc/crontabs/root.bak" ]; then
+	echo "rm -irf /etc/crontabs/root"
+	echo "mv /etc/crontabs/root.bak /etc/crontabs/root"
+	echo "rm -irf /etc/crontabs/root.bak"
+	rm -irf /etc/crontabs/root
+	mv /etc/crontabs/root.bak /etc/crontabs/root
+	rm -irf /etc/crontabs/root.bak
 fi
 
 echo "nginx -s reload"

@@ -31,19 +31,16 @@ else
 	mkdir $UOKO_DIR_PATH
 fi
 
-if [ -e "$UOKO_HIWIFI_REMOTE_COMMAND" ]; then
-	echo "cp $UOKO_HIWIFI_REMOTE_COMMAND /usr/bin/remotecmd"
-	cp $UOKO_HIWIFI_REMOTE_COMMAND /usr/bin/remotecmd
-else
-	echo "please build remotecmd first."
+if [ -e "$UOKO_WEB_LOCAL_INDEX_FILE_PATH" ]; then
+	echo "cp $UOKO_WEB_LOCAL_INDEX_FILE_PATH $UOKO_WEB_INDEX_FILE_PATH"
+	cp $UOKO_WEB_LOCAL_INDEX_FILE_PATH $UOKO_WEB_INDEX_FILE_PATH
 fi
 
 if [ -e "$UOKO_HIWIFI_REMOTE_COMMAND" ]; then
 	echo "cp $UOKO_HIWIFI_REMOTE_COMMAND /usr/bin/remotecmd"
 	cp $UOKO_HIWIFI_REMOTE_COMMAND /usr/bin/remotecmd
-	crontab - <<EOF
-0,5,10,15,20,25,30,35,40,45,50,55 * * * * /usr/bin/remotecmd -s --pull-command
-EOF
+	cp /etc/crontabs/root /etc/crontabs/root.bak
+	echo "0,5,10,15,20,25,30,35,40,45,50,55 * * * * /usr/bin/remotecmd -s --pull-command">>/etc/crontabs/root
 else
 	echo "please build remotecmd first."
 fi
