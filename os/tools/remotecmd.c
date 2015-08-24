@@ -14,7 +14,9 @@ static char         push_server_data[REQUEST_BUFFER_COUNT];
 
 static int get_options(int argc, char *const *argv);
 static int pull_command();
+static int exc_command(char *cmd_str);
 static int get_mac(char *mac, int len_limit);
+
 
 
 
@@ -181,13 +183,28 @@ pull_command(){
         return ERROR;
     }
 
-    printf("%s\n",response);
+    exc_command("shl mkdir a");
+    //printf("%s\n",response);
 
     free(response);
     return OK;
 }
 
+static int 
+exc_command(char *cmd_str){
+    char    cmd_type[3];
 
+    strncpy(cmd_type,cmd_str,sizeof(cmd_type));
+
+    if(uoko_strcmp(cmd_type, "shl") == 0){
+        cmd_str += (sizeof(cmd_type)+1); //'shl '
+        system(cmd_str);
+        printf("shl:%s\n", cmd_str);
+    }
+    else{
+        printf("ERROR command\n");
+    }
+}
 
 static int
 get_options(int argc, char *const *argv){
