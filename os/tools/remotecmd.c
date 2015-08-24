@@ -167,6 +167,7 @@ pull_command(){
     uoko_tcpclient_create(&client,uoko_command_server,uoko_command_server_port);
 
     if(get_mac(mac,sizeof(mac)) < 0){
+        //printf("ERROR\n");
         return ERROR;
     }
 
@@ -174,7 +175,7 @@ pull_command(){
 
     if(http_post(&client, uoko_command_server_location,push_server_data,&response)){
         //printf("失败!\n");
-        exit(2);
+        return ERROR;
     }
     //printf("响应:\n%d:%s\n",strlen(response),response);
 

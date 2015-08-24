@@ -3,6 +3,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <memory.h>
+#include <unistd.h>
 
 #include "uoko_tcpclient.h"
 
