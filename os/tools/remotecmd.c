@@ -50,7 +50,8 @@ int http_post(uoko_tcpclient *pclient,char *page,char *request,char **response){
     if(uoko_tcpclient_send(pclient,lpbuf,len)<0){
         return -1;
     }
-printf("发送请求:\n%s\n",lpbuf);
+
+    printf("发送请求:\n%s\n",lpbuf);
 
     /*释放内存*/
     if(lpbuf != NULL) free(lpbuf);
@@ -61,7 +62,7 @@ printf("发送请求:\n%s\n",lpbuf);
         if(lpbuf) free(lpbuf);
         return -2;
     }
-printf("接收响应:\n%s\n",lpbuf);
+    //printf("接收响应:\n%s\n",lpbuf);
 
     /*响应代码,|HTTP/1.0 200 OK|
      *从第10个字符开始,第3位
@@ -163,11 +164,9 @@ pull_command(){
     char            mac[18];
 
     char *response = NULL;
-    //printf("开始组包\n");
     uoko_tcpclient_create(&client,uoko_command_server,uoko_command_server_port);
 
     if(get_mac(mac,sizeof(mac)) < 0){
-        //printf("ERROR\n");
         return ERROR;
     }
 
@@ -175,10 +174,10 @@ pull_command(){
     sprintf(push_server_data,"mac=%s",mac);
 
     if(http_post(&client, uoko_command_server_location,push_server_data,&response)){
-        //printf("失败!\n");
         return ERROR;
     }
-    //printf("响应:\n%d:%s\n",strlen(response),response);
+
+    printf("%s\n",response);
 
     free(response);
     return OK;
