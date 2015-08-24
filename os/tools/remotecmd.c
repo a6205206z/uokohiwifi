@@ -1,5 +1,7 @@
 #include "remotecmd.h"
 #include "uoko_tcpclient.h"
+#include <sys/ioctl.h>
+#include <net/if.h>        //for struct ifreq
 
 
 static uint         select_option;
@@ -8,10 +10,11 @@ static char         *usignal;
 static const char   *uoko_command_server = "127.0.0.1";
 static const int    uoko_command_server_port = 80;
 static char         *uoko_command_server_location = "/index";
-static char         *uoko_command_server_parms = "i=1";
+static char         *push_server_data;
 
 static int get_options(int argc, char *const *argv);
 static int pull_command();
+static int get_mac(char *mac, int len_limit);
 
 
 
@@ -106,15 +109,50 @@ printf("接收响应:\n%s\n",lpbuf);
     return 0;
 }
 
-static int pull_command(){
+static int 
+get_mac(char *mac, int len_limit){
+    struct ifreq ifreq;
+    int sock;
 
-    uoko_tcpclient client;
+    if ((sock = socket (AF_INET, SOCK_STREAM, 0)) < 0)
+    {
+        perror ("socket");
+        return -1;
+    }
+    strcpy (ifreq.ifr_name, "eth0");    //Currently, only get eth0
+
+    if (ioctl (sock, SIOCGIFHWADDR, &ifreq) < 0)
+    {
+        perror ("ioctl");
+        return -1;
+    }
+    
+    return snprintf (mac, len_limit, "%X:%X:%X:%X:%X:%X", 
+        (unsigned char) ifreq.ifr_hwaddr.sa_data[0], 
+        (unsigned char) ifreq.ifr_hwaddr.sa_data[1], 
+        (unsigned char) ifreq.ifr_hwaddr.sa_data[2], 
+        (unsigned char) ifreq.ifr_hwaddr.sa_data[3], 
+        (unsigned char) ifreq.ifr_hwaddr.sa_data[4], 
+        (unsigned char) ifreq.ifr_hwaddr.sa_data[5]);
+}
+
+static int 
+pull_command(){
+
+    uoko_tcpclient  client;
+    char            mac[18];
 
     char *response = NULL;
     //printf("开始组包\n");
     uoko_tcpclient_create(&client,uoko_command_server,uoko_command_server_port);
 
-    if(http_post(&client, uoko_command_server_location,uoko_command_server_parms,&response)){
+    if(get_mac(mac,sizeof(mac)) < 0){
+        return ERROR;
+    }
+
+    sprintf(push_server_data,"mac=%s",mac);
+
+    if(http_post(&client, uoko_command_server_location,push_server_data,&response)){
         //printf("失败!\n");
         exit(2);
     }
