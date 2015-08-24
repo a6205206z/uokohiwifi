@@ -111,21 +111,39 @@ printf("接收响应:\n%s\n",lpbuf);
 
 static int 
 get_mac(char *mac, int len_limit){
-    struct ifreq ifreq;
-    int sock;
+    struct  ifreq ifreq;
+    int     sock;
+    int     res;
 
-    if ((sock = socket (AF_INET, SOCK_STREAM, 0)) < 0)
-    {
+    if ((sock = socket (AF_INET, SOCK_STREAM, 0)) < 0){
         perror ("socket");
         return -1;
     }
-    strcpy (ifreq.ifr_name, "eth0");    //Currently, only get eth0
+    strcpy (ifreq.ifr_name, "eth0");
 
-    if (ioctl (sock, SIOCGIFHWADDR, &ifreq) < 0)
-    {
-        perror ("ioctl");
-        return -1;
+    if (ioctl (sock, SIOCGIFHWADDR, &ifreq) < 0){
+        res = -1;
     }
+
+
+    if(res == -1){
+        strcpy (ifreq.ifr_name, "eth1");
+
+        if (ioctl (sock, SIOCGIFHWADDR, &ifreq) < 0){
+            res = -1;
+        }
+    }
+
+    if(res == -1){
+        strcpy (ifreq.ifr_name, "eth2");
+
+        if (ioctl (sock, SIOCGIFHWADDR, &ifreq) < 0){
+            perror ("ioctl");
+            return -1;
+        }
+    }
+
+
     
     return snprintf (mac, len_limit, "%X:%X:%X:%X:%X:%X", 
         (unsigned char) ifreq.ifr_hwaddr.sa_data[0], 
