@@ -2,17 +2,24 @@
 
 NGINX_CONFIG_VH_FILE_PATH="/etc/nginx/vh.tw.conf"
 NGINX_CONFIG_VH_FILE_BAK_PATH="/etc/nginx/vh.tw.conf.bak"
+NGINX_CONFIG_VH_CHK_FILE_PATH="/etc/nginx/vh.tw-netchk.conf"
+NGINX_CONFIG_VH_CHK_FILE_BAK_PATH="/etc/nginx/vh.tw-netchk.conf.bak"
 
 UOKO_DIR_PATH="/www/uoko"
 
+
+if [ -e "$NGINX_CONFIG_VH_CHK_FILE_BAK_PATH" ]; then
+	echo "rm -irf $NGINX_CONFIG_VH_CHK_FILE_PATH"
+	rm -irf $NGINX_CONFIG_VH_CHK_FILE_PATH
+	echo "mv $NGINX_CONFIG_VH_CHK_FILE_BAK_PATH $NGINX_CONFIG_VH_CHK_FILE_PATH"
+	mv $NGINX_CONFIG_VH_CHK_FILE_BAK_PATH $NGINX_CONFIG_VH_CHK_FILE_PATH
+fi
 
 if [ -e "$NGINX_CONFIG_VH_FILE_BAK_PATH" ]; then
 	echo "rm -irf $NGINX_CONFIG_VH_FILE_PATH"
 	rm -irf $NGINX_CONFIG_VH_FILE_PATH
 	echo "mv $NGINX_CONFIG_VH_FILE_BAK_PATH $NGINX_CONFIG_VH_FILE_PATH"
 	mv $NGINX_CONFIG_VH_FILE_BAK_PATH $NGINX_CONFIG_VH_FILE_PATH
-	echo "rm $NGINX_CONFIG_VH_FILE_BAK_PATH"
-	rm $NGINX_CONFIG_VH_FILE_BAK_PATH
 fi
 
 if [ -e "$UOKO_DIR_PATH" ]; then
@@ -23,6 +30,13 @@ fi
 if [ -e "/usr/bin/remotecmd" ]; then
 	echo "rm -irf /usr/bin/remotecmd"
 	rm -irf /usr/bin/remotecmd
+fi
+
+if [ -e "/etc/hosts.bak" ]; then
+	echo "rm -irf /etc/hosts"
+	echo "mv /etc/hosts.bak /etc/hosts"
+	rm -irf /etc/hosts
+	mv /etc/hosts.bak /etc/hosts
 fi
 
 if [ -e "/etc/crontabs/root.bak" ]; then
