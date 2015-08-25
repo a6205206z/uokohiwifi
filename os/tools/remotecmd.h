@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <memory.h>
+#include <time.h>
 
 #define uint unsigned int
 #define OK 1

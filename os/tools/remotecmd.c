@@ -5,7 +5,7 @@
 
 
 static uint         select_option;
-static uint         exc_pull_command;
+static uint         exc_heartbeat;
 static char         *usignal;
 static const char   *uoko_command_server = "192.168.200.22";
 static const int    uoko_command_server_port = 8988;
@@ -13,9 +13,10 @@ static char         *uoko_command_server_location = "/login";
 static char         push_server_data[REQUEST_BUFFER_COUNT];
 
 static int get_options(int argc, char *const *argv);
-static int pull_command();
+static int heartbeat();
 static int exc_command(char *cmd_str);
 static int get_mac(char *mac, int len_limit);
+static int push_data(char *data);
 
 
 
@@ -163,11 +164,10 @@ get_mac(char *mac, int len_limit){
 }
 
 static int 
-pull_command(){
+heartbeat(){
 
     uoko_tcpclient  client;
     char            mac[18];
-    int             http_req_code;
 
     char            *response = NULL;
     uoko_tcpclient_create(&client,uoko_command_server,uoko_command_server_port);
@@ -177,14 +177,37 @@ pull_command(){
     }
 
     memset(push_server_data,0,sizeof(push_server_data));
-    sprintf(push_server_data,"mac=%s",mac);
+    sprintf(push_server_data,"requesttype=heartbeat&mac=%s",mac);
 
     if(http_post(&client, uoko_command_server_location,push_server_data,&response)){
         return ERROR;
     }
 
-    exc_command(response);
+    exc_command("psd date");
     //printf("%s\n",response);
+
+    free(response);
+    return OK;
+}
+
+static int 
+push_data(char *data){
+    uoko_tcpclient  client;
+    char            mac[18];
+
+    char            *response = NULL;
+    uoko_tcpclient_create(&client,uoko_command_server,uoko_command_server_port);
+
+    if(get_mac(mac,sizeof(mac)) < 0){
+        return ERROR;
+    }
+
+    memset(push_server_data,0,sizeof(push_server_data));
+    sprintf(push_server_data,"requesttype=pushdata&mac=%s&data=%s", mac, data);
+
+    if(http_post(&client, uoko_command_server_location,push_server_data,&response)){
+        return ERROR;
+    }
 
     free(response);
     return OK;
@@ -200,6 +223,18 @@ exc_command(char *cmd_str){
         cmd_str += (sizeof(cmd_type)+1); //'shl '
         system(cmd_str);
         printf("shl:%s\n", cmd_str);
+    }
+    if(uoko_strcmp(cmd_type, "psd") == 0){
+        cmd_str += (sizeof(cmd_type)+1); //'psd '
+        if(uoko_strcmp(cmd_str, "date") == 0){
+            char date_str[20];
+            time_t now;
+            time(&now);
+            
+            sprintf(date_str,"%d",now);
+            push_data(date_str);
+            printf("psd: date(%s)\n", date_str);
+        }
     }
     else{
         printf("ERROR command\n");
@@ -237,7 +272,7 @@ get_options(int argc, char *const *argv){
 
 
                 if (uoko_strcmp(usignal, "--pull-command") == 0){
-                    exc_pull_command = 1;
+                    exc_heartbeat = 1;
                     goto next;
                 }
 
@@ -265,7 +300,7 @@ int main(int argc, char *const *argv)
        return 1;        
     }
 
-    if(exc_pull_command){
-        return pull_command();
+    if(exc_heartbeat){
+        return heartbeat();
     }
 }
