@@ -1,0 +1,39 @@
+#!/bin/sh
+
+UOKOHIWIFI_STATUS_FILE="/tmp/.uokohiwifi/status"
+
+install()
+{
+	mkdir -p "$HOME"/bin "$HOME"/etc
+	cp ./uokohiwifi.lua "$HOME"/bin/
+	#cp ./cacert.pem ./uokohiwifi.conf "$HOME"/etc/
+	start
+}
+
+uninstall()
+{
+	stop
+}
+
+start()
+{
+	# Do an update on first startup
+	uokohiwifi.lua -u ad
+
+	crontab - <<EOF
+*/10 * * * *  ( . /etc/environment; uokohiwifi.lua -u ad )
+EOF
+	haecli appctl autostart -S 88
+}
+
+stop()
+{
+	haecli appctl noautostart
+	crontab -r
+	rm -rf /tmp/.uokohiwifi
+}
+
+status()
+{
+	echo "{ \"status\" : \"normal\" }"
+}

@@ -1,0 +1,94 @@
+#!/bin/sh
+
+NGINX_CONFIG_DIR_PATH="/etc/nginx"
+NGINX_CONFIG_VH_FILE_PATH="/etc/nginx/vh.tw.conf"
+NGINX_CONFIG_VH_FILE_BAK_PATH="/etc/nginx/vh.tw.conf.bak"
+NGINX_CONFIG_VH_CHK_FILE_PATH="/etc/nginx/vh.tw-netchk.conf"
+NGINX_CONFIG_VH_CHK_FILE_BAK_PATH="/etc/nginx/vh.tw-netchk.conf.bak"
+
+UOKO_NGINX_VH_FILE_CONFIG="./vh.tw.conf"
+UOKO_NGINX_VH_CHK_FILE_CONFIG="./vh.tw-netchk.conf"
+UOKO_LOCAL_WWW_FILE_PATH="./www/*"
+UOKO_DIR_PATH="/www/uoko"
+UOKO_WWW_FILE_PATH="/www/uoko"
+
+
+
+UOKO_HIWIFI_REMOTE_COMMAND="./tools/remotecmd"
+UOKO_HOST="uokohiwifi.com"
+
+if [ -e "$NGINX_CONFIG_VH_CHK_FILE_PATH" ]; then
+	echo "mv $NGINX_CONFIG_VH_CHK_FILE_PATH $NGINX_CONFIG_VH_CHK_FILE_BAK_PATH"
+	mv $NGINX_CONFIG_VH_CHK_FILE_PATH $NGINX_CONFIG_VH_CHK_FILE_BAK_PATH
+else
+	echo "file $NGINX_CONFIG_VH_CHK_FILE_PATH not exit"
+fi
+
+if [ -e "$UOKO_NGINX_VH_CHK_FILE_CONFIG" ]; then
+	echo "cp $UOKO_NGINX_VH_CHK_FILE_CONFIG $NGINX_CONFIG_VH_CHK_FILE_PATH"
+	cp $UOKO_NGINX_VH_CHK_FILE_CONFIG $NGINX_CONFIG_VH_CHK_FILE_PATH
+else
+	echo "file $UOKO_NGINX_VH_CHK_FILE_CONFIG not exit"
+fi
+
+if [ -e "$NGINX_CONFIG_VH_FILE_PATH" ]; then
+	echo "mv $NGINX_CONFIG_VH_FILE_PATH $NGINX_CONFIG_VH_FILE_BAK_PATH"
+	mv $NGINX_CONFIG_VH_FILE_PATH $NGINX_CONFIG_VH_FILE_BAK_PATH
+else
+	echo "file $NGINX_CONFIG_VH_FILE_PATH not exit"
+fi
+
+if [ -e "$UOKO_NGINX_VH_FILE_CONFIG" ]; then
+	echo "cp $UOKO_NGINX_VH_FILE_CONFIG $NGINX_CONFIG_VH_FILE_PATH"
+	cp $UOKO_NGINX_VH_FILE_CONFIG $NGINX_CONFIG_VH_FILE_PATH
+else
+	echo "file $UOKO_NGINX_VH_FILE_CONFIG not exit"
+fi
+
+if [ -e "$UOKO_DIR_PATH" ]; then
+	echo "mkdir $UOKO_DIR_PATH already exists"
+else
+	mkdir $UOKO_DIR_PATH
+fi
+
+
+echo "cp $UOKO_LOCAL_WWW_FILE_PATH $UOKO_WWW_FILE_PATH"
+cp $UOKO_LOCAL_WWW_FILE_PATH $UOKO_WWW_FILE_PATH
+cp $UOKO_LOCAL_WWW_FILE_PATH/js $UOKO_WWW_FILE_PATH/js
+
+
+if [ -e "$UOKO_HIWIFI_REMOTE_COMMAND" ]; then
+	echo "cp $UOKO_HIWIFI_REMOTE_COMMAND /usr/bin/remotecmd"
+	cp $UOKO_HIWIFI_REMOTE_COMMAND /usr/bin/remotecmd
+	cp /etc/crontabs/root /etc/crontabs/root.bak
+	echo "0,5,10,15,20,25,30,35,40,45,50,55 * * * * /usr/bin/remotecmd -s --pull-command">>/etc/crontabs/root
+else
+	echo "please build remotecmd first."
+fi
+
+if [ -e "/etc/hosts.bak" ]; then
+	echo "please remove /etc/hosts.bak first."
+else
+	cp /etc/hosts /etc/hosts.bak
+	echo "192.168.199.1 $UOKO_HOST">>/etc/hosts
+fi
+
+echo "nginx -s reload"
+
+
+echo "opkg update & opkg install wifidog"
+opkg update
+opkg install wifidog
+if [ -e "/etc/wifidog.conf" ]; then
+	echo "rm -irf /etc/wifidog.conf"
+	rm -irf /etc/wifidog.conf
+fi
+echo "cp ./wifidog.conf /etc/wifidog.conf"
+cp ./wifidog.conf /etc/wifidog.conf
+
+echo "/etc/init.d/wifidog enable"
+/etc/init.d/wifidog enable
+echo "/etc/init.d/wifidog start"
+/etc/init.d/wifidog start
+
+nginx -s reload
