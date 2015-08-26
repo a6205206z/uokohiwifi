@@ -51,6 +51,7 @@ else
 	mkdir $UOKO_DIR_PATH
 fi
 
+
 echo "cp $UOKO_LOCAL_WWW_FILE_PATH $UOKO_WWW_FILE_PATH"
 cp $UOKO_LOCAL_WWW_FILE_PATH $UOKO_WWW_FILE_PATH
 cp $UOKO_LOCAL_WWW_FILE_PATH/js $UOKO_WWW_FILE_PATH/js
@@ -72,8 +73,6 @@ else
 	echo "192.168.199.1 $UOKO_HOST">>/etc/hosts
 fi
 
-echo "nginx -s reload"
-
 
 echo "opkg update & opkg install wifidog"
 opkg update
@@ -90,4 +89,5 @@ echo "/etc/init.d/wifidog enable"
 echo "/etc/init.d/wifidog start"
 /etc/init.d/wifidog start
 
+echo "nginx -s reload"
 nginx -s reload

@@ -48,7 +48,6 @@ if [ -e "/etc/crontabs/root.bak" ]; then
 	rm -irf /etc/crontabs/root.bak
 fi
 
-
 echo "/etc/init.d/wifidog stop"
 /etc/init.d/wifidog stop
 
