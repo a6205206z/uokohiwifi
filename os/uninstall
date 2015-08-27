@@ -8,6 +8,8 @@ NGINX_CONFIG_VH_CHK_FILE_BAK_PATH="/etc/nginx/vh.tw-netchk.conf.bak"
 UOKO_DIR_PATH="/www/uoko"
 
 
+echo -e "\033[32m!!!begin uninstall!!!\033[0m"
+
 if [ -e "$NGINX_CONFIG_VH_CHK_FILE_BAK_PATH" ]; then
 	echo "rm -irf $NGINX_CONFIG_VH_CHK_FILE_PATH"
 	rm -irf $NGINX_CONFIG_VH_CHK_FILE_PATH
@@ -53,3 +55,5 @@ echo "/etc/init.d/wifidog stop"
 
 echo "nginx -s reload"
 nginx -s reload
+
+echo -e "\033[32m!!!completed all!!!\033[0m"
