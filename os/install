@@ -19,153 +19,153 @@ UOKO_WWW_FILE_PATH="/www/uoko"
 UOKO_HIWIFI_REMOTE_COMMAND="./tools/remotecmd"
 UOKO_HOST="uokohiwifi.com"
 
-echoerror()
+echo_error()
 {
 	echo -e "\033[31m$1\033[0m"
 }
-echopass()
+echo_pass()
 {
 	echo -e "\033[32m$1\033[0m"
 }
-echowarning()
+echo_warning()
 {
 	echo -e "\033[33m$1\033[0m"
 }
 
 uninstall()
 {
-	echopass "!!!begin uninstall!!!"
+	echo_pass "!!!begin uninstall!!!"
 
 	if [ -e "$NGINX_CONFIG_VH_CHK_FILE_BAK_PATH" ]; then
-		echopass "rm -irf $NGINX_CONFIG_VH_CHK_FILE_PATH"
+		echo_pass "rm -irf $NGINX_CONFIG_VH_CHK_FILE_PATH"
 		rm -irf $NGINX_CONFIG_VH_CHK_FILE_PATH
-		echopass "mv $NGINX_CONFIG_VH_CHK_FILE_BAK_PATH $NGINX_CONFIG_VH_CHK_FILE_PATH"
+		echo_pass "mv $NGINX_CONFIG_VH_CHK_FILE_BAK_PATH $NGINX_CONFIG_VH_CHK_FILE_PATH"
 		mv $NGINX_CONFIG_VH_CHK_FILE_BAK_PATH $NGINX_CONFIG_VH_CHK_FILE_PATH
 	fi
 
 	if [ -e "$NGINX_CONFIG_VH_FILE_BAK_PATH" ]; then
-		echopass "rm -irf $NGINX_CONFIG_VH_FILE_PATH"
+		echo_pass "rm -irf $NGINX_CONFIG_VH_FILE_PATH"
 		rm -irf $NGINX_CONFIG_VH_FILE_PATH
-		echopass "mv $NGINX_CONFIG_VH_FILE_BAK_PATH $NGINX_CONFIG_VH_FILE_PATH"
+		echo_pass "mv $NGINX_CONFIG_VH_FILE_BAK_PATH $NGINX_CONFIG_VH_FILE_PATH"
 		mv $NGINX_CONFIG_VH_FILE_BAK_PATH $NGINX_CONFIG_VH_FILE_PATH
 	fi
 
 	if [ -e "$UOKO_DIR_PATH" ]; then
-		echopass "rm -rf $UOKO_DIR_PATH"
+		echo_pass "rm -rf $UOKO_DIR_PATH"
 		rm -rf $UOKO_DIR_PATH
 	fi
 
 	if [ -e "/usr/bin/remotecmd" ]; then
-		echopass "rm -irf /usr/bin/remotecmd"
+		echo_pass "rm -irf /usr/bin/remotecmd"
 		rm -irf /usr/bin/remotecmd
 	fi
 
 	if [ -e "/etc/hosts.bak" ]; then
-		echopass "rm -irf /etc/hosts"
-		echopass "mv /etc/hosts.bak /etc/hosts"
+		echo_pass "rm -irf /etc/hosts"
+		echo_pass "mv /etc/hosts.bak /etc/hosts"
 		rm -irf /etc/hosts
 		mv /etc/hosts.bak /etc/hosts
 	fi
 
 	if [ -e "/etc/crontabs/root.bak" ]; then
-		echopass "rm -irf /etc/crontabs/root"
-		echopass "mv /etc/crontabs/root.bak /etc/crontabs/root"
-		echopass "rm -irf /etc/crontabs/root.bak"
+		echo_pass "rm -irf /etc/crontabs/root"
+		echo_pass "mv /etc/crontabs/root.bak /etc/crontabs/root"
+		echo_pass "rm -irf /etc/crontabs/root.bak"
 		rm -irf /etc/crontabs/root
 		mv /etc/crontabs/root.bak /etc/crontabs/root
 		rm -irf /etc/crontabs/root.bak
 	fi
 
-	echopass "/etc/init.d/wifidog stop"
+	echo_pass "/etc/init.d/wifidog stop"
 	/etc/init.d/wifidog stop
 
-	echopass "nginx -s reload"
+	echo_pass "nginx -s reload"
 	nginx -s reload
 
-	echopass "!!!completed all!!!"
+	echo_pass "!!!completed all!!!"
 }
 
 install()
 {
-	echopass "!!!begin install!!!"
+	echo_pass "!!!begin install!!!"
 	if [ -e "$NGINX_CONFIG_VH_CHK_FILE_BAK_PATH" ]; then
-		echowarning "file $NGINX_CONFIG_VH_CHK_FILE_BAK_PATH already exists"
+		echo_warning "file $NGINX_CONFIG_VH_CHK_FILE_BAK_PATH already exists"
 	else
-		echopass "mv $NGINX_CONFIG_VH_CHK_FILE_PATH $NGINX_CONFIG_VH_CHK_FILE_BAK_PATH"
+		echo_pass "mv $NGINX_CONFIG_VH_CHK_FILE_PATH $NGINX_CONFIG_VH_CHK_FILE_BAK_PATH"
 		mv $NGINX_CONFIG_VH_CHK_FILE_PATH $NGINX_CONFIG_VH_CHK_FILE_BAK_PATH
 	fi
 
 	if [ -e "$NGINX_CONFIG_VH_CHK_FILE_BAK_PATH" ]; then
-		echopass "cp $UOKO_NGINX_VH_CHK_FILE_CONFIG $NGINX_CONFIG_VH_CHK_FILE_PATH"
+		echo_pass "cp $UOKO_NGINX_VH_CHK_FILE_CONFIG $NGINX_CONFIG_VH_CHK_FILE_PATH"
 		cp $UOKO_NGINX_VH_CHK_FILE_CONFIG $NGINX_CONFIG_VH_CHK_FILE_PATH
 	else
-		echowarning "file $NGINX_CONFIG_VH_CHK_FILE_BAK_PATH not exit"
+		echo_warning "file $NGINX_CONFIG_VH_CHK_FILE_BAK_PATH not exit"
 	fi
 
 	if [ -e "$NGINX_CONFIG_VH_FILE_BAK_PATH" ]; then
-		echowarning "file $NGINX_CONFIG_VH_FILE_BAK_PATH already exists"
+		echo_warning "file $NGINX_CONFIG_VH_FILE_BAK_PATH already exists"
 	else
-		echopass "mv $NGINX_CONFIG_VH_FILE_PATH $NGINX_CONFIG_VH_FILE_BAK_PATH"
+		echo_pass "mv $NGINX_CONFIG_VH_FILE_PATH $NGINX_CONFIG_VH_FILE_BAK_PATH"
 		mv $NGINX_CONFIG_VH_FILE_PATH $NGINX_CONFIG_VH_FILE_BAK_PATH
 	fi
 
 	if [ -e "$NGINX_CONFIG_VH_FILE_BAK_PATH" ]; then
-		echopass "cp $UOKO_NGINX_VH_FILE_CONFIG $NGINX_CONFIG_VH_FILE_PATH"
+		echo_pass "cp $UOKO_NGINX_VH_FILE_CONFIG $NGINX_CONFIG_VH_FILE_PATH"
 		cp $UOKO_NGINX_VH_FILE_CONFIG $NGINX_CONFIG_VH_FILE_PATH
 	else
-		echowarning "file $NGINX_CONFIG_VH_FILE_BAK_PATH not exit"
+		echo_warning "file $NGINX_CONFIG_VH_FILE_BAK_PATH not exit"
 	fi
 
 	if [ -e "$UOKO_DIR_PATH" ]; then
-		echopass "mkdir $UOKO_DIR_PATH already exists"
+		echo_pass "mkdir $UOKO_DIR_PATH already exists"
 	else
 		mkdir $UOKO_DIR_PATH
 	fi
 
 
-	echopass "cp $UOKO_LOCAL_WWW_FILE_PATH $UOKO_WWW_FILE_PATH"
+	echo_pass "cp $UOKO_LOCAL_WWW_FILE_PATH $UOKO_WWW_FILE_PATH"
 	cp -R $UOKO_LOCAL_WWW_FILE_PATH/* $UOKO_WWW_FILE_PATH
 
 
 	if [ -e "$UOKO_HIWIFI_REMOTE_COMMAND" ]; then
-		echopass "cp $UOKO_HIWIFI_REMOTE_COMMAND /usr/bin/remotecmd"
+		echo_pass "cp $UOKO_HIWIFI_REMOTE_COMMAND /usr/bin/remotecmd"
 		cp $UOKO_HIWIFI_REMOTE_COMMAND /usr/bin/remotecmd
 		cp /etc/crontabs/root /etc/crontabs/root.bak
 		echo "0,5,10,15,20,25,30,35,40,45,50,55 * * * * /usr/bin/remotecmd -s --pull-command">>/etc/crontabs/root
 	else
-		echoerror "please build remotecmd first."
+		echo_error "please build remotecmd first."
 	fi
 
 	if [ -e "/etc/hosts.bak" ]; then
-		echowarning "please remove /etc/hosts.bak first."
+		echo_warning "please remove /etc/hosts.bak first."
 	else
 		cp /etc/hosts /etc/hosts.bak
 		echo "192.168.199.1 $UOKO_HOST">>/etc/hosts
 	fi
 
 
-	echopass "!!!install wifidog!!!"
-	echopass "opkg update & opkg install wifidog"
+	echo_pass "!!!install wifidog!!!"
+	echo_pass "opkg update & opkg install wifidog"
 	opkg update
 	opkg install wifidog
 	if [ -e "/etc/wifidog.conf" ]; then
-		echopass "rm -irf /etc/wifidog.conf"
+		echo_pass "rm -irf /etc/wifidog.conf"
 		rm -irf /etc/wifidog.conf
 	fi
-	echopass "cp ./wifidog.conf /etc/wifidog.conf"
+	echo_pass "cp ./wifidog.conf /etc/wifidog.conf"
 	cp ./wifidog.conf /etc/wifidog.conf
 
-	echopass "/etc/init.d/wifidog enable"
+	echo_pass "/etc/init.d/wifidog enable"
 	/etc/init.d/wifidog enable
-	echopass "/etc/init.d/wifidog start"
+	echo_pass "/etc/init.d/wifidog start"
 	/etc/init.d/wifidog start
-	echopass "!!!completed wifidog!!!"
+	echo_pass "!!!completed wifidog!!!"
 
 
-	echopass "nginx -s reload"
+	echo_pass "nginx -s reload"
 	nginx -s reload
 
-	echopass "!!!completed all!!!"
+	echo_pass "!!!completed all!!!"
 }
 
 if [ "$SHELL_ACTION"x = "-u"x ]; then
