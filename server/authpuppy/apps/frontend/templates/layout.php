@@ -6,7 +6,6 @@ if ($site_name != '') {
 }
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
     <?php include_http_metas() ?>
@@ -37,7 +36,7 @@ if ($site_name != '') {
     </head>
     <body>
     <iframe id="iframepage" name="iframepage" frameBorder=0
-     height="1920px" scrolling=no width="100%" src="http://192.168.199.1:8081/"></iframe>
+     height="100%" scrolling="yes" width="100%" src="http://192.168.199.1:8081/2015/07/summer/"></iframe>
 
     <div id="show" style="font-weight:bold;background-color: yellow; position: fixed; left: 0px; top: 30px; 
     padding: 10px 50px 10px 100px; color: rgb(63, 203, 192);

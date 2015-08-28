@@ -17,7 +17,7 @@ UOKO_WWW_FILE_PATH="/www/uoko"
 
 
 UOKO_HIWIFI_REMOTE_COMMAND="./tools/remotecmd"
-UOKO_HOST="uokohiwifi.com"
+UOKO_HOST="authpuppy.uoko.ioc"
 
 echo_error()
 {
@@ -140,7 +140,7 @@ install()
 		echo_warning "please remove /etc/hosts.bak first."
 	else
 		cp /etc/hosts /etc/hosts.bak
-		echo "192.168.199.1 $UOKO_HOST">>/etc/hosts
+		echo "192.168.200.22 $UOKO_HOST">>/etc/hosts
 	fi
 
 
