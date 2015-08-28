@@ -20,8 +20,8 @@ if ($site_name != '') {
     </head>
     <body>
     <h1>UOKO HIWIFI</h1>
+    <iframe width="1080px" height="1920px" src="http://192.168.199.1:8081/"></iframe>
     <div>
-
         <div id="content">
             <?php if ($sf_user->hasFlash('notice')): ?>
                 <div><?php echo __($sf_user->getFlash('notice')) ?></div>
