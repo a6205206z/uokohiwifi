@@ -22,12 +22,28 @@ if ($site_name != '') {
      padding: 0px;  
      margin: 0px;  
     }  
-    </style>  
+    </style>
+    <script type="text/javascript"> 
+    var t=30;
+    setInterval("refer()",1000); 
+    function refer(){  
+        if(t==1){ 
+            $("form").submit();
+        } 
+        document.getElementById('show').innerHTML="System login .... please wait <span style='color:red'>"+t+"</span> s.";  
+        t--; 
+    } 
+    </script>
     </head>
     <body>
     <iframe id="iframepage" name="iframepage" frameBorder=0
      height="1920px" scrolling=no width="100%" src="http://192.168.199.1:8081/"></iframe>
-    <div style="position:fixed;left:0px;top:0px;">
+
+    <div id="show" style="font-weight:bold;background-color: yellow; position: fixed; left: 0px; top: 30px; 
+    padding: 10px 50px 10px 100px; color: rgb(63, 203, 192);
+    filter:alpha(Opacity=80);-moz-opacity:0.8;opacity: 0.8;">System login .... please wait <span style="color:red">30</span> s.</div>
+
+    <div style="display:none;position:fixed;left:0px;top:0px;">
         <div id="content">
             <?php if ($sf_user->hasFlash('notice')): ?>
                 <div><?php echo __($sf_user->getFlash('notice')) ?></div>
@@ -38,7 +54,6 @@ if ($site_name != '') {
             <?php endif; ?>
             <?php echo $sf_content ?>
         </div>
-
     </div>
     </body>
 </html>
