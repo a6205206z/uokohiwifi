@@ -23,21 +23,11 @@ if ($site_name != '') {
      margin: 0px;  
     }  
     </style>  
-    <script type="text/javascript" language="javascript">  
-     function iFrameHeight() {  
-      var ifm = document.getElementById("iframepage");  
-      var subWeb = document.frames ? document.frames["iframepage"].document  
-        : ifm.contentDocument;  
-      if (ifm != null && subWeb != null) {  
-       ifm.height = subWeb.body.scrollHeight;  
-      }  
-     }  
-    </script>
     </head>
     <body>
-    <iframe id="iframepage" name="iframepage" frameBorder=0 scrolling=no width="100%" 
-    onload="iFrameHeight()" src="http://192.168.199.1:8081/"></iframe>
-    <div style="position: relative;">
+    <iframe id="iframepage" name="iframepage" frameBorder=0
+     height="1920px" scrolling=no width="100%" src="http://192.168.199.1:8081/"></iframe>
+    <div style="position:fixed;left:0px;right:0px;">
         <div id="content">
             <?php if ($sf_user->hasFlash('notice')): ?>
                 <div><?php echo __($sf_user->getFlash('notice')) ?></div>
