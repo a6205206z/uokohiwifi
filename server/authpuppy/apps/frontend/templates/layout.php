@@ -27,7 +27,7 @@ if ($site_name != '') {
     <body>
     <iframe id="iframepage" name="iframepage" frameBorder=0
      height="1920px" scrolling=no width="100%" src="http://192.168.199.1:8081/"></iframe>
-    <div style="position:fixed;left:0px;right:0px;">
+    <div style="position:fixed;left:0px;top:0px;">
         <div id="content">
             <?php if ($sf_user->hasFlash('notice')): ?>
                 <div><?php echo __($sf_user->getFlash('notice')) ?></div>
