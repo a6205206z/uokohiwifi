@@ -14,22 +14,21 @@ if ($site_name != '') {
     <?php include_title() ?>
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php use_stylesheet('jQuery/themes/ui-lightness/jquery-ui-1.8.2.custom.css') ?>
-    <?php include_stylesheets() ?>
     <?php use_javascript('jQuery/jquery-1.4.2.min.js') ?>
     <?php use_javascript('jQuery/jquery-ui-1.8.2.custom.min.js') ?>
     <?php include_javascripts() ?>
     </head>
     <body>
     <h1>UOKO HIWIFI</h1>
-    <div id="page" class="container ">
+    <div>
 
-        <div id="content" class="span-16">
+        <div id="content">
             <?php if ($sf_user->hasFlash('notice')): ?>
-                <div class="notice"><?php echo __($sf_user->getFlash('notice')) ?></div>
+                <div><?php echo __($sf_user->getFlash('notice')) ?></div>
             <?php endif; ?>
      
             <?php if ($sf_user->hasFlash('error')): ?>
-                <div class="error"><?php echo __($sf_user->getFlash('error')) ?></div>
+                <div><?php echo __($sf_user->getFlash('error')) ?></div>
             <?php endif; ?>
             <?php echo $sf_content ?>
         </div>
