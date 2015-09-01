@@ -1,0 +1,8 @@
+<% content_for :application do %>
+	<a href="/router/index">back</a>
+	<ul/>
+		<% @command.errors.full_messages.each do |msg| %>
+	      <li><p><%= msg %></p></li>
+	   <% end %>
+	</ul>
+<% end %>

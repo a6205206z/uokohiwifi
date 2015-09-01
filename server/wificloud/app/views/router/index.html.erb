@@ -1,0 +1,18 @@
+<% content_for :application do %>
+<a href="/router/new">new router</a>
+<a href="/command/new">push command</a>
+<ul>
+	<% @routers.each do |r| %>
+		<li>mac: <%= r.mac_address %> room No. <%= r.room_no%> status: 
+		<% if r.online %> 
+			<span style='color:green'>online</span>
+		<% else %>
+			<span style='color:red'>offline</span> 
+		<% end %>
+		 last ping time <%= r.last_recv_ping_time.localtime %> 
+		 <a href="/router/ping_io?mac=<%= r.mac_address %>">IO</a> 
+		 <a href="/command/show?mac=<%= r.mac_address %>">Command queue</a>
+		 </li>
+	<% end %>
+</ul>
+<% end %>

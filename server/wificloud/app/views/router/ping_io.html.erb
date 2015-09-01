@@ -1,0 +1,9 @@
+<% content_for :application do %>
+<a href="/router">back</a>
+
+<ul>
+	<% @ios.each do |i| %>
+		<li>mac: <%= i.mac_address %> ping time <%= i.recv_time.localtime %></li>
+	<% end %>
+</ul>
+<% end %>

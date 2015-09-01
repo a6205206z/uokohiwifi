@@ -1,0 +1,11 @@
+<% content_for :application do %>
+	<% form_for :command, :url => { :action => :save } do |form| %>
+	  <p>
+	   	<%= label :command, :mac_address, "MAC Address:" %>
+	   	<%= form.select :mac_address, options_for_select(@mac_addresses), :include_blank => false, :style => "width:200px"-%>
+		<%= label :command, :command, "Command:" %>
+	   	<%= form.text_field :command, :size => 40 %>
+	  </p>
+	  <%= submit_tag "Add in push list" , :class => "submit" %>
+	<% end %>
+<% end %>

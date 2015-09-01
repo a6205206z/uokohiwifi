@@ -1,0 +1,18 @@
+<% content_for :application do %>
+	<% form_for :router, :url => { :action => :save } do |form| %>
+	  <p>
+	   <%= label :router, :mac_address, "MAC Address:" %>
+	   <%= form.text_field :mac_address, :size => 40 %>
+
+	  </p>
+	  <p>
+	   <%= label :router, :room_no, "Rom No.:" %>
+	   <%= form.text_field :room_no, :size => 40 %>
+	  </p>
+	  <p>
+	   <%= label :router, :model, "Router Model:" %>
+	   <%= form.text_field :model, :size => 40 %>
+	  </p>
+	  <%= submit_tag "Add Router" , :class => "submit" %>
+	<% end %>
+<% end %>
