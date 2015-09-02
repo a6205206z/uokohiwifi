@@ -157,8 +157,8 @@ install()
 
 	echo_pass "/etc/init.d/wifidog enable"
 	/etc/init.d/wifidog enable
-	echo_pass "/etc/init.d/wifidog start"
-	/etc/init.d/wifidog start
+	#echo_pass "/etc/init.d/wifidog start"
+	#/etc/init.d/wifidog start
 	echo_pass "!!!completed wifidog!!!"
 
 
