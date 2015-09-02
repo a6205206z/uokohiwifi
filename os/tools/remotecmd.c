@@ -7,9 +7,9 @@
 static uint         select_option;
 static uint         exc_heartbeat;
 static char         *usignal;
-static const char   *uoko_command_server = "192.168.200.22";
-static const int    uoko_command_server_port = 8988;
-static char         *uoko_command_server_location = "/login";
+static const char   *uoko_command_server = "192.168.199.204";
+static const int    uoko_command_server_port = 80;
+static char         *uoko_command_server_location = "/router_api/ping";
 static char         push_server_data[REQUEST_BUFFER_COUNT];
 
 static int get_options(int argc, char *const *argv);
@@ -183,8 +183,8 @@ heartbeat(){
         return ERROR;
     }
 
-    exc_command("psd date");
-    //printf("%s\n",response);
+    exc_command(response);
+    printf("%s\n",response);
 
     free(response);
     return OK;
@@ -215,17 +215,17 @@ push_data(char *data){
 
 static int 
 exc_command(char *cmd_str){
-    char    cmd_type[3];
+    char    cmd_type[] = "cmd";
 
-    strncpy(cmd_type,cmd_str,sizeof(cmd_type));
+    strncpy(cmd_type,cmd_str,sizeof(cmd_type) - 1);
 
     if(uoko_strcmp(cmd_type, "shl") == 0){
-        cmd_str += (sizeof(cmd_type)+1); //'shl '
+        cmd_str += (sizeof(cmd_type)); //'shl '
         system(cmd_str);
         printf("shl:%s\n", cmd_str);
     }
-    if(uoko_strcmp(cmd_type, "psd") == 0){
-        cmd_str += (sizeof(cmd_type)+1); //'psd '
+    else if(uoko_strcmp(cmd_type, "psd") == 0){
+        cmd_str += (sizeof(cmd_type)); //'psd '
         if(uoko_strcmp(cmd_str, "date") == 0){
             char date_str[20];
             time_t now;
@@ -235,9 +235,6 @@ exc_command(char *cmd_str){
             push_data(date_str);
             printf("psd: date(%s)\n", date_str);
         }
-    }
-    else{
-        printf("ERROR command\n");
     }
 }
 
