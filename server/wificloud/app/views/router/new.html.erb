@@ -1,18 +1,42 @@
 <% content_for :application do %>
 	<% form_for :router, :url => { :action => :save } do |form| %>
-	  <p>
-	   <%= label :router, :mac_address, "MAC Address:" %>
-	   <%= form.text_field :mac_address, :size => 40 %>
-
-	  </p>
-	  <p>
-	   <%= label :router, :room_no, "Rom No.:" %>
-	   <%= form.text_field :room_no, :size => 40 %>
-	  </p>
-	  <p>
-	   <%= label :router, :model, "Router Model:" %>
-	   <%= form.text_field :model, :size => 40 %>
-	  </p>
-	  <%= submit_tag "Add Router" , :class => "submit" %>
+	<div >
+	    <div class="modal-dialog ">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	                <h4 class="modal-title">添加路由器</h4>
+	            </div>
+	            <div class="modal-body">
+	                <div class="portlet-body form">
+	                    <form role="form">
+	                        <div class="form-body">
+	                            <div class="form-group form-md-line-input form-md-floating-label">
+	                            	<%= form.text_field :mac_address, :size => 40, :class => "form-control", :id => "mac_address" %>
+	                                <label for="mac_address">MAC地址</label>
+	                                <span class="help-block">必填项</span>
+	                            </div>
+	                            <div class="form-group form-md-line-input form-md-floating-label">
+	                            	<%= form.text_field :room_no, :size => 40, :class => "form-control", :id => "room_number" %>
+	                                <label for="room_number">房间编号</label>
+	                                <span class="help-block">必填项</span>
+	                            </div>
+	                            <div class="form-group form-md-line-input form-md-floating-label">
+	                            	<%= form.text_field :model, :size => 40, :class => "form-control", :id => "route_type" %>
+	                                <label for="route_type">路由器类型</label>
+	                                <span class="help-block">必填项</span>
+	                            </div>
+	                        </div>
+	                    </form>
+	                </div>
+	                <div class="modal-footer">
+	                	<%= submit_tag "添加" , :class => "btn blue", :id => "add_route" %>
+	                </div>
+	            </div>
+	            <!-- /.modal-content -->
+	        </div>
+	        <!-- /.modal-dialog -->
+	    </div>
+	</div>
 	<% end %>
 <% end %>

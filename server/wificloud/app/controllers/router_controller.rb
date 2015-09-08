@@ -13,6 +13,7 @@ class RouterController < ApplicationController
 
 	def save
 		@router = Router.new(router_params)
+		@router.save
 	end
 
 	private

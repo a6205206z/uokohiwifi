@@ -1,0 +1,64 @@
+.my-select,.my-selected{
+    height: 300px;
+    float: left;
+}
+.my-select{
+    width: 60%;
+}
+.my-select h5{
+    border-bottom: 1px solid #000000;
+    padding:10px;
+    font-weight: 700;
+}
+.my-select ul{
+    padding-left: 0;
+    margin-top: 20px;
+}
+.my-selected{
+    width: 35%;
+    float: right;
+    border: 2px solid green;
+}
+
+
+.my-select ul li{
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.my-selected ul{
+    padding-left: 0;
+}
+.my-selected ul li{
+    width: 62px;
+    height: 62px;
+    line-height: 62px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    margin: 10px 16px 10px 16px;
+    border-radius: 5px;
+}
+.my-container{
+    width: 100%;
+    height: auto;
+}
+.my-container:after{
+    content: ".";
+    display: block;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    clear: both;
+    min-height: 0;
+    visibility: hidden;
+}
+.form-group.form-md-line-input:last-child{
+    margin-bottom: 12px;
+}
+

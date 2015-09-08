@@ -5,7 +5,8 @@ class CommandController < ApplicationController
 	end
 
 	def new
-		@mac_addresses = Router.pluck(:mac_address)
+		@mac = params[:mac]
+		@commands = Command.where(mac_address: params[:mac]).order("id DESC")
 	end
 
 	def show

@@ -1,8 +1,10 @@
 <% content_for :application do %>
-	<a href="/router/index">back</a>
-	<ul/>
-		<% @router.errors.full_messages.each do |msg| %>
-	      <li><p><%= msg %></p></li>
-	   <% end %>
-	</ul>
+	
+	<% @router.errors.full_messages.each do |msg| %>
+	     <div class="alert alert-danger"><%= msg %></div>
+	<% end %>
+	<!--这里是提示增加失败提示(可同时用于其他操作的失败或成功提示)-->
+
+	<div class="alert alert-success"><a href="/router/index">BACK</a></div>
+	<!---->
 <% end %>

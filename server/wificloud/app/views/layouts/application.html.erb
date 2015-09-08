@@ -1,14 +1,172 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Wificloud</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+    <head>
+        <meta charset="utf-8"/>
+        <title>uoko</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <!--引入/global样式开始 -->
+        <link href="/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+        <link href="/global/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/global/css/components.min.css" id="style_components" rel="stylesheet" type="text/css"/>
+        <link href="/global/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css"/>
+        <link href="/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
 
-<%= yield :application %>
+        <!-- 引入结束 -->
+        <!-- 引入layout css开始 -->
 
-</body>
+        <link href="/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
+        <link href="/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css" id="style_color"/>
+        <link href="/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="/admin/pages/css/my-select.css">
+        <!-- 引入结束-->
+        <link rel="shortcut icon" href="favicon.ico"/>
+    </head>
+    <body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo page-container-bg-solid">
+        <!--这里引入nav-->
+        <!-- BEGIN HEADER -->
+        <div class="page-header -i navbar navbar-fixed-top">
+            <!-- BEGIN HEADER INNER -->
+            <div class="page-header-inner">
+                <!-- BEGIN LOGO -->
+                <div class="page-logo">
+                    <a href="index.html">
+                        <img src="/admin/layout/img/logo.png" alt="logo" class="logo-default"/>
+                    </a>
+
+                </div>
+                <!-- END LOGO -->
+                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <div class="hor-menu hidden-sm hidden-xs">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#">极路由</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END RESPONSIVE MENU TOGGLER -->
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <div class="top-menu">
+
+                    <ul class="nav navbar-nav pull-right">
+                        <!-- BEGIN NOTIFICATION DROPDOWN -->
+                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        <!-- END TODO DROPDOWN -->
+                        <!-- BEGIN USER LOGIN DROPDOWN -->
+                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        <li class="dropdown dropdown-user">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                               data-close-others="true">
+                                <img alt="" class="img-circle" src="/admin/layout/img/avatar3_small.jpg"/>
+        					<span class="username username-hide-on-mobile">
+        					超级管理员 </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default">
+                                <li>
+                                    <a href="login.html">
+                                        <i class="icon-key"></i>退出</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END USER LOGIN DROPDOWN -->
+                        <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+
+                    </ul>
+                </div>
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+
+
+        </div>
+        <!-- END HEADER -->
+        <!--引入nav结束-->
+        <!--清除浮动 -->
+        <div class="clearfix">
+        </div>
+        <!-- 主体 -->
+        <div class="page-container">
+            <!--这里引入侧边栏-->
+            <!-- 菜单列表 -->
+            <div class="page-sidebar-wrapper">
+                <div class="page-sidebar navbar-collapse collapse">
+                    <ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                        <li class="sidebar-toggler-wrapper">
+                            <div class="sidebar-toggler">
+                            </div>
+                        </li>
+
+                        <li class="start active">
+                            <a href="javascript:;">
+                                <i class="icon-home"></i>
+                                <span class="title">路由器</span>
+                                <span class="selected"></span>
+                                <span class="arrow"></span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- END SIDEBAR MENU -->
+                </div>
+            </div>
+            <!-- END SIDEBAR -->
+            <!--引入侧边栏结束-->
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                	<%= yield :application %>
+                </div>
+            </div>
+        </div>
+
+        <!-- 引入删除modal结束 -->
+        <!-- 引入底部 -->
+        <!-- BEGIN FOOTER -->
+        <div class="page-footer">
+            <div class="page-footer-inner">
+                2015 &copy; base by uoko.
+            </div>
+            <div class="scroll-to-top">
+                <i class="icon-arrow-up"></i>
+            </div>
+        </div>
+        <script src="/global/plugins/jquery.min.js" type="text/javascript"></script>
+        <script src="/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+        <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+        <script src="/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+        <script src="/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+        <script src="/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+        <script src="/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script>
+        <!-- END CORE PLUGINS -->
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <script type="text/javascript" src="/global/plugins/select2/select2.min.js"></script>
+        <script type="text/javascript" src="/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+        <!-- END PAGE LEVEL PLUGINS -->
+        <!-- BEGIN PAGE LEVEL SCRIPTS -->
+        <script src="/global/scripts/metronic.js" type="text/javascript"></script>
+        <script src="/admin/layout/scripts/layout.js" type="text/javascript"></script>
+        <script src="/admin/pages/scripts/table-managed.js"></script>
+        <script type="text/javascript" src="/admin/pages/scripts/index.js"></script>
+
+        <!-- END PAGE LEVEL SCRIPTS -->
+        <script>
+            jQuery(document).ready(function () {
+                Metronic.init();
+                Layout.init();
+                TableManaged.init();
+
+            });
+        </script>
+
+
+    </body>
 </html>

@@ -1,17 +1,71 @@
 <% content_for :application do %>
-	<a href="/router/index">back</a>
-<ul>
-	<% @commands.each do |c| %>
-		<li>mac: <%= c.mac_address %>
-		command : <%= c.command %>
-		<% if c.status == 1 %> 
-			<span style='color:green'>pushed !</span>
-		<% elsif c.status == 2 %>
-			<span style='color:red'>error !!!</span>
-		<% else%>
-			<span style='color:blue'>wait ...</span>
-		<% end %>
-		 </li>
-	<% end %>
-</ul>
+            <h3 class="page-title">
+                命令队列
+            </h3>
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                    <div class="portlet box grey-cascade">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-globe"></i>命令队列
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="table-toolbar">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="btn-group">
+                                            <a href="/router/index" data-toggle="modal">
+                                            <button class="btn green" data-toggle="modal"
+                                                    href="#addRoute">
+                                                返回首页 <i class="fa fa-back"></i>
+                                            </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-striped table-bordered table-hover" >
+                                <thead>
+                                <tr>
+                                    <th class="table-checkbox">
+                                       路由器MAC
+                                    </th>
+                                    <th>
+                                        命令
+                                    </th>
+                                    <th>
+                                        状态
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+									<% @commands.each do |c| %>
+                                <tr class="odd gradeX">
+                                    <td>
+                                        <%= c.mac_address %>
+                                    </td>
+                                    <td>
+                                        <%= c.command %>
+                                    </td>
+                                    <td>
+										<% if c.status == 1 %> 
+											<span style='color:green'>pushed !</span>
+										<% elsif c.status == 2 %>
+											<span style='color:red'>error !!!</span>
+										<% else%>
+											<span style='color:blue'>wait ...</span>
+										<% end %>
+                                    </td>
+                                </tr>
+ 								<% end %>                               
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- END EXAMPLE TABLE PORTLET-->
+                </div>
+            </div>
 <% end %>

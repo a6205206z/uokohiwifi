@@ -1,11 +1,64 @@
 <% content_for :application do %>
 	<% form_for :command, :url => { :action => :save } do |form| %>
-	  <p>
-	   	<%= label :command, :mac_address, "MAC Address:" %>
-	   	<%= form.select :mac_address, options_for_select(@mac_addresses), :include_blank => false, :style => "width:200px"-%>
-		<%= label :command, :command, "Command:" %>
-	   	<%= form.text_field :command, :size => 40 %>
-	  </p>
-	  <%= submit_tag "Add in push list" , :class => "submit" %>
+	<div>
+	    <div class="modal-dialog modal-lg ">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	                <h4 class="modal-title">推送命令</h4>
+	            </div>
+	            <div class="modal-body">
+	            <div class="my-container">
+	              <div class="my-select">
+	                  <ul>
+	                  <h5><%= @mac%> 的功能列表</h5>
+	                      <li data-id="1" class="btn-primary" onclick="add_commad('shl /etc/init.d/wifidog start')">启用广告</li>
+	                      <li data-id="2" class="btn-primary" onclick="add_commad('shl /etc/init.d/wifidog stop')">关闭广告</li>
+	                  </ul>
+	              </div>
+	             	<div style="dispka">
+	             		<h5><%= @mac%> 的功能列表</h5>
+	             		<ul style="height:450px;overflow:scroll;">
+	             		<% @commands.each do |c| %>
+	             		
+		             		<li data-id="1"><%= c.command %> 
+			             		<% if c.status == 1 %> 
+									<span style='color:green'>pushed !</span>
+								<% elsif c.status == 2 %>
+									<span style='color:red'>error !!!</span>
+								<% else%>
+									<span style='color:blue'>wait ...</span>
+								<% end %>
+						</li>
+						
+ 						<% end %>     
+ 						</ul>                          
+	             	</div>
+	              </div>
+	            </div>
+	            <div class="modal-footer">
+	                <a href="/router/index"><button type="button" class="btn blue" data-dismiss="modal">完成</button></a>
+	            </div>
+	        </div>
+	        <!-- /.modal-content -->
+	    </div>
+	    <!-- /.modal-dialog -->
+	</div>
+	<script type="text/javascript">
+		function add_commad (cmd) {
+			$("#mac").val('<%= @mac%>');
+			$("#cmd").val(cmd);
+			$("#ok").click();
+		}
+	</script>
+	<div style="display:none">
+		  <p>
+		   	<%= label :command, :mac_address, "MAC Address:" %>
+		   	<%= form.text_field :mac_address, :id => "mac" %>
+			<%= label :command, :command, "Command:" %>
+		   	<%= form.text_field :command, :size => 40, :id => "cmd" %>
+		  </p>
+		  <%= submit_tag "Add in push list" , :class => "submit", :id => "ok" %>
+	  </div>
 	<% end %>
 <% end %>
