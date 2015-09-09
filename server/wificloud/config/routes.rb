@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
+  root 'router#index'
   resources :router do
     get 'index', on: :collection
     get 'ping_io', on: :collection
