@@ -7,7 +7,7 @@
 static uint         select_option;
 static uint         exc_heartbeat;
 static char         *usignal;
-static const char   *uoko_command_server = "192.168.199.204";
+static const char   *uoko_command_server = "router.uoko.com";
 static const int    uoko_command_server_port = 80;
 static char         *uoko_command_server_location = "/router_api/ping";
 static char         push_server_data[REQUEST_BUFFER_COUNT];
