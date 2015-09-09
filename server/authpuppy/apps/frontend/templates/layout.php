@@ -90,6 +90,7 @@ function isMobile()
      margin: 0px;  
     }  
     </style>
+    <!--
     <script type="text/javascript"> 
     var t=30;
     setInterval("refer()",1000); 
@@ -101,6 +102,7 @@ function isMobile()
         t--; 
     } 
     </script>
+    -->
     </head>
     <body>
     <?php if(isMobile()){ ?>
@@ -113,11 +115,11 @@ function isMobile()
     <iframe id="iframepage" name="iframepage" frameBorder=0
      height="100%" scrolling="yes" width="100%" src="http://192.168.199.1:8081/router/index.html"></iframe>
     <?php }?>
-
+    <!--
     <div id="show" style="font-weight:bold;background-color: yellow; position: fixed; left: 0px; top: 30px; 
     padding: 10px 50px 10px 100px; color: rgb(63, 203, 192);
     filter:alpha(Opacity=80);-moz-opacity:0.8;opacity: 0.8;">System login .... please wait <span style="color:red">30</span> s.</div>
-
+    -->
     <div style="display:none;position:fixed;left:0px;top:0px;">
         <div id="content">
             <?php if ($sf_user->hasFlash('notice')): ?>
