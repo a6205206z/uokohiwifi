@@ -90,12 +90,9 @@ function isMobile()
      margin: 0px;  
     }  
     .connecting input {
-    width: 138px;
-    height: 44px;
     background-color: #F8B551;
     border: 1px solid #F8B551;
     border-radius: 20px;
-    font-size: 18px;
     outline: medium none;
     }
     </style>
@@ -123,8 +120,8 @@ function isMobile()
     <?php if(isMobile()){ ?>
     <iframe id="iframepage" name="iframepage" frameBorder=0
      height="100%" scrolling="yes" width="100%" src="http://192.168.199.1:8081/router/mobile_index.html"></iframe>
-    <div style="position: absolute; right:43%; top:80%;" class="connecting">
-        <input onclick="pass()" type="button" value="连接网络">
+    <div style="position: absolute; right:35%; top:80%;" class="connecting">
+        <input onclick="pass()" style="width: 276px;height: 88px;font-size: 30px;" type="button" value="连接网络">
     </div>
      <?php 
      }
@@ -133,7 +130,7 @@ function isMobile()
     <iframe id="iframepage" name="iframepage" frameBorder=0
      height="100%" scrolling="yes" width="100%" src="http://192.168.199.1:8081/router/index.html"></iframe>
     <div style="position: absolute; right:20%; top:80%;" class="connecting">
-        <input onclick="pass()" type="button" value="连接网络">
+        <input onclick="pass()" style="width: 138px;height: 44px;font-size: 18px;" type="button" value="连接网络">
     </div>
     <?php }?>
     <!--
