@@ -87,7 +87,8 @@ function isMobile()
     <style type="text/css">  
     body {  
      padding: 0px;  
-     margin: 0px;  
+     margin: 0px;
+     position: realative;
     }  
     .connecting input {
     background-color: #F8B551;
@@ -120,7 +121,7 @@ function isMobile()
     <?php if(isMobile()){ ?>
     <iframe id="iframepage" name="iframepage" frameBorder=0
      height="100%" scrolling="yes" width="100%" src="http://192.168.199.1:8081/router/mobile_index.html"></iframe>
-    <div style="position: absolute; right:35%; top:80%;" class="connecting">
+    <div style="position: absolute; right:35%; bottom:20%;" class="connecting">
         <input onclick="pass()" style="width: 276px;height: 88px;font-size: 30px;" type="button" value="连接网络">
     </div>
      <?php 
@@ -129,7 +130,7 @@ function isMobile()
         ?>
     <iframe id="iframepage" name="iframepage" frameBorder=0
      height="100%" scrolling="yes" width="100%" src="http://192.168.199.1:8081/router/index.html"></iframe>
-    <div style="position: absolute; right:20%; top:80%;" class="connecting">
+    <div style="position: absolute; right:20%; bottom:20%;" class="connecting">
         <input onclick="pass()" style="width: 138px;height: 44px;font-size: 18px;" type="button" value="连接网络">
     </div>
     <?php }?>
