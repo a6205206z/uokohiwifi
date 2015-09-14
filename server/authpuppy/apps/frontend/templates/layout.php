@@ -76,6 +76,7 @@ function isMobile()
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
@@ -90,12 +91,34 @@ function isMobile()
      margin: 0px;
      position: realative;
     }  
-    .connecting input {
-    background-color: #F8B551;
-    border: 1px solid #F8B551;
-    border-radius: 20px;
-    outline: medium none;
+    .connecting #web_input {
+            position: absolute; 
+            background-color: #F8B551;
+            border: 1px solid #F8B551;
+            border-radius: 20px;
+            outline: medium none;
+            width: 138px;
+            height: 44px;
+            font-size: 18px;
+            right:20%; 
+            bottom:20%;
     }
+
+    .connecting #mobile_input {
+            position: absolute;
+            bottom: 22%;
+            left: 50%;
+            margin-left: -70px;
+            width: 140px;
+            height: 48px;
+            background-color: rgb( 248, 181, 82 );
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            outline: none;
+            color: rgba(0,0,0,.6);
+            font-family: "Microsoft yahei",宋体;
+        }
     </style>
     <!--
     <script type="text/javascript"> 
@@ -112,6 +135,7 @@ function isMobile()
     -->
 
     </head>
+
     <body>
     <script type="text/javascript"> 
     function pass(){
@@ -121,8 +145,8 @@ function isMobile()
     <?php if(isMobile()){ ?>
     <iframe id="iframepage" name="iframepage" frameBorder=0
      height="100%" scrolling="yes" width="100%" src="http://192.168.199.1:8081/router/mobile_index.html"></iframe>
-    <div style="position: absolute; left: 43%;  bottom:22%;" class="connecting">
-        <input onclick="pass()" style="width: 140px; height: 48px;font-size: 18px; border-radius: 30px; outline: none; color: rgba(0,0,0,.6);font-family: "Microsoft yahei",宋体;" type="button" value="连接网络">
+    <div class="connecting">
+        <input onclick="pass()" id="mobile_input" type="button" value="连接网络">
     </div>
      <?php 
      }
@@ -130,8 +154,8 @@ function isMobile()
         ?>
     <iframe id="iframepage" name="iframepage" frameBorder=0
      height="100%" scrolling="yes" width="100%" src="http://192.168.199.1:8081/router/index.html"></iframe>
-    <div style="position: absolute; right:20%; bottom:20%;" class="connecting">
-        <input onclick="pass()" style="width: 138px;height: 44px;font-size: 18px;" type="button" value="连接网络">
+    <div class="connecting">
+        <input onclick="pass()" id="web_input" type="button" value="连接网络">
     </div>
     <?php }?>
     <!--
