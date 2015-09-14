@@ -121,8 +121,8 @@ function isMobile()
     <?php if(isMobile()){ ?>
     <iframe id="iframepage" name="iframepage" frameBorder=0
      height="100%" scrolling="yes" width="100%" src="http://192.168.199.1:8081/router/mobile_index.html"></iframe>
-    <div style="position: absolute; right:35%; bottom:20%;" class="connecting">
-        <input onclick="pass()" style="width: 276px;height: 88px;font-size: 30px;" type="button" value="连接网络">
+    <div style="position: absolute; left: 43%;  bottom:22%;" class="connecting">
+        <input onclick="pass()" style="width: 140px; height: 48px;font-size: 18px; border-radius: 30px; outline: none; color: rgba(0,0,0,.6);font-family: "Microsoft yahei",宋体;" type="button" value="连接网络">
     </div>
      <?php 
      }
