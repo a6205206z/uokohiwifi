@@ -1,10 +1,10 @@
 <% content_for :application do %>
-	<% form_for :router, :url => { :action => :save } do |form| %>
+	<% form_for :router, :url => router_index_path(), :method => "POST" do |form| %>
 	<div >
 	    <div class="modal-dialog ">
 	        <div class="modal-content">
 	            <div class="modal-header">
-	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="location.href='/router'"></button>
 	                <h4 class="modal-title">添加路由器</h4>
 	            </div>
 	            <div class="modal-body">

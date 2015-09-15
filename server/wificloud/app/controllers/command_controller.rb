@@ -1,5 +1,5 @@
 class CommandController < ApplicationController
-	def save
+	def create
 		@command = Command.new(router_params)
 		@command.save
 	end

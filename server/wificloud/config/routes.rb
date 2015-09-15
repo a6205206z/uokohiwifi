@@ -56,13 +56,10 @@ Rails.application.routes.draw do
 
   root 'router#index'
   resources :router do
-    get 'index', on: :collection
     get 'ping_io', on: :collection
-    post 'save', on: :collection
   end
 
   resources :command do
-    post 'save', on: :collection
   end
 
   resources :router_api do
